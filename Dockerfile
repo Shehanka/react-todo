@@ -1,16 +1,18 @@
-FROM alpine:3.9
+FROM node:8.16.2-alpine
 
-RUN mkdir -p c:/temp/src/app
+# set working directory
+WORKDIR /usr/src/app
 
-WORKDIR c:/temp/src/app
-
-COPY package.json c:/temp/src/app/
-
+# install and cache app dependencies
+COPY package*.json ./
+ADD package.json /usr/src/app/package.json
 RUN npm install
 
-ADD src c:/temp/app/src
-ADD public c:/temp/src/app/public
+# Bundle app source
+COPY . .
 
-RUN npm build
+# Specify port
+EXPOSE 3000
 
+# start app
 CMD ["npm", "start"]
