@@ -21,8 +21,9 @@ class TodoItem extends Component {
           <input
             type='checkbox'
             onChange={this.props.markComplete.bind(this, id)}
+            className='form-check-input'
           />{' '}
-          {title}
+          {title}{' '}
           <button
             className='btn btn-danger'
             onClick={this.props.deleteTodo.bind(this, id)}
